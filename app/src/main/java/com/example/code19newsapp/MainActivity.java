@@ -3,7 +3,6 @@ package com.example.code19newsapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         /**
-         * initilizaing retrofit api
+         * initializing retrofit api
          * to the main domain - https://newsapi.org/
          * GsonConverterFactory is used to convert the json data to java objects
          * for request calls
@@ -68,8 +67,14 @@ public class MainActivity extends AppCompatActivity {
         RetrofitApi retrofitApi = retrofit.create(RetrofitApi.class);
         Call<NewsApi> call = retrofitApi.getNewsApi();
 
+
         call.enqueue(new Callback<NewsApi>() {
 
+            /**
+             * if request is successful, data are received by recyclerVIew
+             * @param call
+             * @param response
+             */
             @Override
             public void onResponse(Call<NewsApi> call, Response<NewsApi> response) {
                 if(response.isSuccessful()){
@@ -81,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+
+            /**
+             * if request gets failed, tries to get data from the local
+             * shows a toast message that there is an error
+             * @param call
+             * @param t
+             */
             @Override
             public void onFailure(Call<NewsApi> call, Throwable t) {
                 try{
@@ -94,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * getList method reads the json String saved in the sharedPreference in keyword "saved_articles"
+     * json data are the all news articles
+     * @return NewsArticleList
+     */
+
     public List<NewsArticle> getList(){
         List<NewsArticle> arrayItems = null;
         String serializedObject = sharedPreferences.getString("saved_articles", null);
@@ -104,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
         return arrayItems;
     }
 
+    /**
+     * while app is onPause the saveData() method saves request data into memory
+     */
     @Override
     protected void onPause() {
         saveData();
@@ -111,12 +133,17 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
+
+    /**
+     * getSharedPreferences saves the data in "saveNewsArticle" keyword
+     * saveData() Method saves the request data in format of a json string in the local memory in xml format
+     * Gson is used  to convert Java NewsArticle object into their JSON representation
+     */
     public void saveData(){
         try {
             sharedPreferences = getSharedPreferences("saveNewsArticle", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            Gson gson = new Gson();
-            String json = gson.toJson(data);
+            String json = new Gson().toJson(data);
             editor.putString("saved_articles",json);
             editor.commit();
         } catch (Exception e) {

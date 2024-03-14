@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Article">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="403dp"
+        android:layout_height="682dp"
+        android:background="#FFFFFF"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="362dp"
+            android:layout_height="184dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="13dp"
+            app:layout_constraintBottom_toTopOf="@+id/article_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_image_available_612x612" />
+
+        <EditText
+            android:id="@+id/article_title"
+            android:layout_width="352dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="13dp"
+            android:background="#FFFEFE"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:text="title"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/article_published_at"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_image" />
+
+        <TextView
+            android:id="@+id/article_published_at"
+            android:layout_width="184dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="50dp"
+            android:background="#FFFFFF"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/article_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/article_image"
+            app:layout_constraintTop_toBottomOf="@+id/article_title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/article_home_button"
+            android:layout_width="187dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="109dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="107dp"
+            android:layout_marginBottom="51dp"
+            android:background="#9C4141"
+            android:text="Return Home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/article_content"
+            app:layout_constraintVertical_bias="0.257" />
+
+        <EditText
+            android:id="@+id/article_content"
+            android:layout_width="377dp"
+            android:layout_height="229dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="88dp"
+            android:background="#FBFBFB"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:text="content"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

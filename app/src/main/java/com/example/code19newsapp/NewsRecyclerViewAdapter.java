@@ -1,5 +1,6 @@
 package com.example.code19newsapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -19,6 +21,7 @@ import java.util.List;
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsArticleViewHolder> {
 
     private ArrayList<NewsArticle> newsArticleList;
+    Intent i;
 
 
     public NewsRecyclerViewAdapter(List<NewsArticle> newsArticleList) {
@@ -50,6 +53,17 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         else{
             Picasso.get().load(newsArticleList.get(position).getImageUrl()).into(holder.newsImageView);
         }
+        holder.cardView.setOnClickListener(v -> {
+            i = new Intent(v.getContext(),Article.class);
+            i.putExtra("title", newsArticleList.get(position).getTitle());
+            i.putExtra("content", newsArticleList.get(position).getContent());
+            i.putExtra("imageUrl", newsArticleList.get(position).getImageUrl());
+            i.putExtra("publishedAt", newsArticleList.get(position).getPublishedAt());
+            v.getContext().startActivity(i);
+        });
+
+
+
     }
 
     @Override
@@ -61,13 +75,14 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         private TextView publishedAt;
         private EditText titleEditView,descriptionEditView;
         private ImageView newsImageView;
-
+        private CardView cardView;
         public NewsArticleViewHolder(@NonNull View itemView) {
             super(itemView);
             publishedAt = itemView.findViewById(R.id.news_published_at);
             titleEditView = itemView.findViewById(R.id.news_title);
             descriptionEditView = itemView.findViewById(R.id.news_description);
             newsImageView = itemView.findViewById(R.id.news_image_View);
+            cardView = itemView.findViewById(R.id.news_card_id);
 
         }
     }
